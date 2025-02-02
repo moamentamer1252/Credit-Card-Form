@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url(https://t4.ftcdn.net/jpg/02/00/68/69/360_F_200686969_GJ7zbz2qaNIE4dyHSbZkQXvNPzRuwlr3.jpg);
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .card {
+            width: 100%;
+            height: 230px;
+            background: url('https://www.transparenttextures.com/patterns/wood.png'), #000;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .chip img, .logo img {
+            width: 50px;
+        }
+        .chip {
+            position: absolute;
+            transform: translatey(-3px);
+            right: 10px;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 13px;
+        }
+        .card-number {
+            font-size: 20px;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        .card-holder {
+            font-size: 16px;
+            text-align: left;
+            margin-top: 65px;
+        }
+        .expiry {
+            font-size: 14px;
+            text-align: right;
+            margin-top: -20px;
+        }
+        .form {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        .form input {
+            font-family: 'Times New Roman', Times, serif;
+            color: #ffffff;
+            outline: none;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #ffffff0e;
+            backdrop-filter: blur(3px);
+        }
+        .form label {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                height: auto;
+            }
+            .container {
+                max-width: 100%;
+            }
+            .card {
+                height: 200px;
+                padding: 15px;
+            }
+            .card-number {
+                font-size: 18px;
+                margin-top: 60px;
+            }
+            .card-holder {
+                font-size: 14px;
+            }
+            .expiry {
+                font-size: 12px;
+            }
+            .form {
+                width: 100%;
+            }
+            .form input {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/2560px-MasterCard_Logo.svg.png" alt="Mastercard Logo">
+            </div>
+            <div class="chip">
+                <img src="cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA3L2pvYjEwNjgtZWxlbWVudC1jaGlwLTAyLWw1dDJxc243LmpwZw-removebg-preview.png" alt="Chip">
+            </div>
+            <div class="card-number" id="card-number">•••• •••• •••• ••••</div>
+            <div class="card-holder" id="card-holder">Cardholder Name</div>
+            <div class="expiry" id="expiry">MM/YY</div>
+        </div>
+
+        <div class="form">
+            <label>Card Number:</label>
+            <input type="tel" id="input-card-number" maxlength="19" placeholder="1234 5678 9012 3456">
+            
+            <label>Cardholder Name:</label>
+            <input type="text" id="input-card-holder" placeholder="John Doe">
+            
+            <label>Expiry Date:</label>
+            <input type="tel" id="input-expiry" maxlength="5" placeholder="MM/YY">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("input-card-number").addEventListener("input", function() {
+            let value = this.value.replace(/\D/g, "").substring(0, 16);
+            value = value.replace(/(\d{4})/g, "$1 ").trim();
+            document.getElementById("card-number").textContent = value || "•••• •••• •••• ••••";
+        });
+
+        document.getElementById("input-card-holder").addEventListener("input", function() {
+            document.getElementById("card-holder").textContent = this.value || "Cardholder Name";
+        });
+
+        document.getElementById("input-expiry").addEventListener("input", function() {
+            let value = this.value.replace(/\D/g, "").substring(0, 4);
+            if (value.length > 2) {
+                value = value.substring(0, 2) + "/" + value.substring(2, 4);
+            }
+            document.getElementById("expiry").textContent = value || "MM/YY";
+        });
+    </script>
+</body>
+</html>
